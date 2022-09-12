@@ -1,0 +1,188 @@
+------------- Tagged template Literals -----------
+
+// Conecpt and Syntax
+
+- Template Strings are simple. string with back tick and ${} dynamic variable values
+- You have template string and pass it in a function with different function calling syntax as.
+- pass in function  transform`${greeting} my name is ${name} and i am ${age}`
+- You will receive static and dynamic content separately.
+- functuin transform(static, ...tags) // static is array ,  tags will be list of dynamic content, you make it ... array
+- static is array showing statinc content in array.
+- tags will convert to array and display in console.
+- You cannot do like Techsith
+let str = `${greeting} my name is ${name} and i am ${age}`;
+transform`${str}`; // it gives you static array [] , and dynamic show whole string
+- Static array shows empty string in 1st or last index if there is dynamic value there. otherwise after every comma index. there will be dynamic value there accordingly
+- When i have separate dynamic and static content. I can do any transformation on it.
+- Lets say find name  and replace it with whatever you want. 
+- after transform combine both static and dynamic to return new result.
+
+// Use cases of TTL 
+
+- JEST , i have written test cases when you have many test cases. you use TTL.
+it.each`
+x    |   y   |  expected
+${5} |  ${4} |   ${9}
+`("returns $expected when $x is added to $y", ({x,y,expected})=> .....)
+- Internationaliation in i18n. i18n`You owe me ${amount}`
+- GraphQL queries. gql with apolli client queries.
+- Styled components - CSS to JSX
+const myButton = styled.button`background-color: ${color}; cursor: ${(props)=> props.clickable ? 'pointer': ''auto}`;
+Transform methods already written by style component library
+You can use it as react component with css applied dynamically. <myButton> </myButton>
+Styled component attach unique class to each element. so it make style local to component.
+
+
+----------------- Ways to Style React Components - Academind ----------------
+
+// Inline styles.
+- add style props to any JSX element. even with div,button or custom component. like <div style={{width: 20px, padding: 2px}}>
+- Drawbacks 
+    1- Style part of JSX.
+    2- Mo reusability
+    3- peudo effect , pseudo classes not possible
+
+// CSS file and import 
+- JS Size + External CSS file Size
+- import css file in component file.
+- our class name part of style tag on top. and can affect other buttons too
+- Not scoped to this component. can apply to any other component with same class.
+- so one technique is BEM. give class name instead of element name. .button class.
+- BEM is convention to use class names.
+- but there is chance of human error for same className. 
+
+
+// CSS Modules
+- build time tanformation. supported by create react app.
+- build tool, webpack make it unique. make it locall.
+- way to style components. you apply styles directly to JSX/html and make your own classes
+- it make style as JS object , and make it available locally only scoped.
+- css class name become property of object. you can import it and apply it in JSX className. 
+- external CSS file size as well
+- import classes from 'button.module.css', className = {classes.myButton}
+- Class name changed by webpack , part of style at top. but unique name.
+- CSS modules transformer make classes unique
+
+
+
+// Styled Components - Articles and Academind
+- Easy syntax
+- No css files dependancy
+- disadvantage is. you cannot cache css, no style available to browser until style component parsed, slows renderign.
+- CSS file is mssing, because it attach style to component. style component add style in top of index.html top. and no external css file
+- Its more of Style component library. 
+- work with real css instead of JS objects
+- Reusable
+- use TTL
+- Import default export as styled. and style.div`css static + dynamic`.
+- it created div with mentioned style. and make style component and return it. 
+- create react project and start follow practice
+- created styled Div as component. apply css. and simply write code as <styledDiv> <userSummary /> <styledDiv>
+- it will behave same like normal div. whatever wrap inside it it renders it. library handles it sutomatically
+- Run project. There will be no inline Style css. Auto class name is given to it. and style is attach to it
+- Library takes css you passed, put it as global style tag with unique class name. you can see in browser inspect top. style is appended.
+- You can reuse this styled component 
+- Similarly you can create Styled paragraph component. and set its style. import it and use it. anything wrap inside. css will be applied.
+- You can reuse it anywhere else.
+- Similarly for button as well.
+- We can use all regular elements properties directly in styled components elements. under the hood. it implemenyts and wraps same.
+- <styledButton id='asa' onCLick={clickHandler} />
+- <StyledButton bg='red' onClick={buttonHandler}>My Style Button</StyledButton>
+- handle css property through props as well. syntac is background: ${(props)=>props.bg};
+- all pseudo classes and selctors works well with it.
+- Convention to create style components are "button.styled.tsx"
+- you can use media queries as well
+- for using it with Typescript. make sure create props types for styled components.
+-  export const Button = styled.button<ButtonProps>`
+  background-color: ${props => props.bgcolor};
+- You can apply any theme using styled components and COntext Provider API React.
+-  export const Button = styled.button<ButtonProps>`
+  background-color: ${props => props.bgcolor};
+-Extending Styles : You can extend style for existing style component. and add some more css like
+const TomatoButton = styled(Button)` // Button is existing Style component
+  color: tomato;
+  border-color: tomato;
+`;
+- can extend 3rd party component and extend its css like LInk in router react library
+- const StyledLink = styled(Link)`
+  color: palevioletred;
+  font-weight: bold;
+`;
+- Define Styled Components outside of the render method otherwuse it will re recreate on every render.
+- Different selectors used in style components. & + & -> <thing> next to <thing> , & ~ & -> <thing> sibling to <thing>
+- && instance specific styles.
+- You can write logic within styled.span1`` and based on props you can return css.
+
+----- Style Component - Code Evoloution  ----
+
+// WHat and Why
+- Css in JS solution for react and native
+- Tagged template literals , css scoped and attach to component
+- Adapted by so many comapnies
+- beenfits are automatic critical css, loading least code, no class name bugs, esier deletion of css because attach to components, 
+  dynamic styling , easy syntax, easy maintenance, automatic vendor prefix(no need to write for current browser)
+- Preq are basics of react and Css
+
+// Install and basic setup
+- install react app and styled component
+- install vscode extension vscode-styled-components
+- for highlighting and intellisense support
+
+// 1st style component
+- create button style components as mentioned above in Notes
+- it show you updated style button
+- separate style component file as button.style.jsx and use in regular component.
+
+// using props in styled components
+- access props as above notes and use in css in TTL
+
+// Extending styles with style components
+- extend styles from existing style components with over rides of existing components
+- Basic syntac it is.
+- export const FancyButton = styled(StyledButton)`
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 100%);
+    border: none;
+`
+- POlymorphic behaviour - <FancyButton as="a"> Fancy Button </FancyButton> render it as anchor tag. helpful in situation like navbars.
+- It works well with Custom components as well.
+
+// Pseudo selectors
+- focus or hover on element in styled components
+- $:hover {color: red}, before after first letter
+
+// Passed props and Attributes
+- There is scenario where you want your button type to be submit. you can pass html props type=submit .
+- but you need to write it as many times you need to add it.
+- There is short cut of it. using .attrs({type: submit})`css here`
+- Props can be received in attr((props)=>) as well . so you decide attributes based on props passed.
+export const SubmitButton = styled(StyledButton).attrs( (props)=> ({
+    type: props.submit ? 'submit' : 'button',
+}))`
+  background-color: yellow;
+`
+// Animation support ith key frames
+- react logo animation by default
+- it has common global css, conflict in styling
+- Style component library give you kyframe hlper
+- import keyframe from styled components. define it in a const variable.
+- const rotate = keyframe`from{} to{}`
+- AnimatedLogo = styled.img`animation: ${rotate} infinite 2s linear`
+- Now use it ad pass src as well.
+
+// Theming support
+- ThemeProvider from styled component. import it. wrap around app like <ThemeProvider theme={theme}>
+- theme is json object. where you define themes key values
+- theme available in all styled components. use it to assign to properties from theme object.
+- this theme is available in all style components props. use it as
+- border: 2px solid ${props => props.theme.dark.primary};
+
+// Global Styles
+- By default style component scope to local component files
+- things like css helpers, base style sheets. you have createGlobalStyle method available.
+- import it and use it like simple way.
+- const globalSTyle = createGlobalStyle`css`
+- and put it inside themeProvider like
+<ThemeProvider theme={theme as DefaultTheme}>
+            <GlobalStyle />
+- So we can have access of theme variables as well in it.
+

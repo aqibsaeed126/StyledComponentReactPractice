@@ -186,3 +186,24 @@ export const SubmitButton = styled(StyledButton).attrs( (props)=> ({
             <GlobalStyle />
 - So we can have access of theme variables as well in it.
 
+
+-------------- CSS Selctors ------------
+
+- universal         -    *
+- Type/Element      -    div {}
+- class             -    .red
+- id                -    #id
+- combine multiple  -    div.red.green-text
+- multple selector  -    comma separated - div.red, li {}
+- Nested selector   -    ul li {} - all li's under ul , div .red { }, red class under div's
+- Direct Child      -    div > b
+- Siblings after    -    li.red ~ li - all li sibling of li.red after it
+- 1 sibling after   -    li.red + li
+- peudo classes     -    li:hover, li:focus, input:required, input:checked, input:disabled, li:first-child, 
+                         li:nth-child(2n), span:only-child, span:first-of-type (all span as 1st child)
+                         li:not(.green)
+- Pseudo Elements   -    div.red::before{content: 'before'}, div.red::after{content: 'before'}
+- Attribute         -    [data-red] (having data-red attribute),  [data-red="red"] , 
+                         [data-red ^="red"] (starts with), [data-red $="red"] (ends with)
+                          [data-red *="red"] (contains/substring)
+
